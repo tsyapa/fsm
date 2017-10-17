@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,8 +12,9 @@
         android:layout_height="wrap_content"
         android:text="@string/lock"
         android:textAllCaps="false"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="342dp" />
+        android:layout_alignBaseline="@+id/buttonUnlock"
+        android:layout_alignBottom="@+id/buttonUnlock"
+        android:layout_alignStart="@+id/buttonLockX2" />
 
     <Button
         android:id="@+id/buttonUnlock"
@@ -22,7 +23,10 @@
         android:text="@string/unlock"
         android:textAllCaps="false"
         tools:layout_editor_absoluteX="238dp"
-        tools:layout_editor_absoluteY="342dp" />
+        tools:layout_editor_absoluteY="342dp"
+        android:layout_above="@+id/buttonUnlockX2"
+        android:layout_alignStart="@+id/buttonUnlockX2"
+        android:layout_marginBottom="30dp" />
 
     <Button
         android:id="@+id/buttonLockX2"
@@ -31,7 +35,11 @@
         android:text="@string/lockx2"
         android:textAllCaps="false"
         tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="429dp" />
+        tools:layout_editor_absoluteY="429dp"
+        android:layout_alignBaseline="@+id/buttonUnlockX2"
+        android:layout_alignBottom="@+id/buttonUnlockX2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="44dp" />
 
     <Button
         android:id="@+id/buttonUnlockX2"
@@ -40,7 +48,11 @@
         android:text="@string/unlockx2"
         android:textAllCaps="false"
         tools:layout_editor_absoluteX="238dp"
-        tools:layout_editor_absoluteY="429dp" />
+        tools:layout_editor_absoluteY="429dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="52dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -49,6 +61,10 @@
         android:text="@string/disarmed"
         android:gravity="center"
         android:background="@color/green"
+        android:textColor="@color/white"
         tools:layout_editor_absoluteX="82dp"
-        tools:layout_editor_absoluteY="83dp" />
-</android.support.constraint.ConstraintLayout>
+        tools:layout_editor_absoluteY="83dp"
+        android:layout_marginBottom="83dp"
+        android:layout_above="@+id/buttonLock"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
