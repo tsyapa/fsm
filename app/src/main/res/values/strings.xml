@@ -6,6 +6,4 @@
     <string name="unlockx2">UNLOCKx2</string>
     <string name="armed">ARMED</string>
     <string name="disarmed">DISARMED</string>
-    <color name="red">#FF0000</color>
-    <color name="green">#00FF00</color>
 </resources>
