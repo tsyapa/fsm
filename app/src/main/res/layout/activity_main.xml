@@ -6,13 +6,49 @@
     android:layout_height="match_parent"
     tools:context="com.example.vitaliytsyapa.fsm.MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/lock"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="342dp" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/unlock"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="238dp"
+        tools:layout_editor_absoluteY="342dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lockx2"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="429dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/unlockx2"
+        android:textAllCaps="false"
+        tools:layout_editor_absoluteX="238dp"
+        tools:layout_editor_absoluteY="429dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="201dp"
+        android:layout_height="141dp"
+        android:text="@string/disarmed"
+        android:gravity="center"
+        android:background="@color/green"
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="83dp" />
 </android.support.constraint.ConstraintLayout>
