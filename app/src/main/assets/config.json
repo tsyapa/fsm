@@ -96,6 +96,6 @@
             "from":"AlarmDisarmed_DriverUnlocked",
             "to":"AlarmDisarmed_DriverUnlocked",
             "action":"unlockX2"
-        },
+        }
     ]
 }

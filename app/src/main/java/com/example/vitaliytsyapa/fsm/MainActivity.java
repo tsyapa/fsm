@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView state=(TextView) findViewById(R.id.textView);
         Button btnLock=(Button) findViewById(R.id.buttonLock);
         setListeners();
+        FSM fsm=new FSM(this);
     }
 
     private void setListeners(){
