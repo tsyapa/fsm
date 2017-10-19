@@ -14,11 +14,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final TextView state=(TextView) findViewById(R.id.textView);
         Button btnLock=(Button) findViewById(R.id.buttonLock);
-        btnLock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                state.setBackgroundColor(getResources().getColor(R.color.red));
-            }
-        });
+        setListeners();
+    }
+
+    private void setListeners(){
+
     }
 }
