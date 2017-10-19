@@ -16,6 +16,18 @@ public class Transition {
         this.action=action;
     }
 
+    public String getFromState(){
+        return fromState;
+    }
+
+    public String getToState(){
+        return toState;
+    }
+
+    public String getAction(){
+        return action;
+    }
+
     @Override
     public String toString(){
         return fromState+" "+toState+" "+action;

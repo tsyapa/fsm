@@ -21,7 +21,7 @@ public class FSM {
 
     private ArrayList<String> states;
     private ArrayList<String> actions;
-    private String initialState;
+    private String currentState;
     private ArrayList<Transition> transitions;
     private Context context;
 
@@ -35,7 +35,7 @@ public class FSM {
             JSONObject jsonObject=new JSONObject(readJson(context));
             states=readArray("states", jsonObject);
             actions=readArray("actions", jsonObject);
-            initialState=readField("initialState",jsonObject);
+            currentState=readField("initialState",jsonObject);
             transitions=readTransitions(jsonObject);
         }catch (Exception e){
             e.printStackTrace();
@@ -75,6 +75,20 @@ public class FSM {
             transitionsList.add(transition);
         }
         return transitionsList;
+    }
+
+    public void changeState(String currentState, String action){
+        String nextState=null;
+        for(Transition transition : transitions){
+            if(transition.getFromState().equals(currentState) && transition.getAction().equals(action))
+                nextState=transition.getToState();
+        }
+        if(nextState!=null)
+            this.currentState=nextState;
+    }
+
+    public String getCurrentState(){
+        return currentState;
     }
 
     public static void showToast(Context context, String message) {
