@@ -24,9 +24,7 @@ public class Transition {
         return toState;
     }
 
-    public String getAction(){
-        return action;
-    }
+    public String getAction(){ return action; }
 
     @Override
     public String toString(){

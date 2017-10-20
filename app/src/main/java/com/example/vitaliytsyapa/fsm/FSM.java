@@ -25,40 +25,34 @@ public class FSM {
     private ArrayList<Transition> transitions;
     private Context context;
 
-    public FSM(Context context){
+    public FSM(Context context) throws IOException,JSONException{
         this.context=context;
         init();
     }
 
-    private void init(){
-        try{
-            JSONObject jsonObject=new JSONObject(readJson(context));
-            states=readArray("states", jsonObject);
-            actions=readArray("actions", jsonObject);
-            currentState=readField("initialState",jsonObject);
-            transitions=readTransitions(jsonObject);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    private void init() throws IOException,JSONException{
+        JSONObject jsonObject=new JSONObject(readJson(context));
+        states=readArray("states", jsonObject);
+        actions=readArray("actions", jsonObject);
+        currentState=readField("initialState",jsonObject);
+        transitions=readTransitions(jsonObject);
     }
 
     private String readJson(Context context) throws IOException{
-        String json=null;
-        InputStream is = context.getAssets().open("config.json");
+        InputStream is=context.getAssets().open("config.json");
         int size=is.available();
         byte[] buffer=new byte[size];
         is.read(buffer);
         is.close();
-        json=new String(buffer, "UTF-8");
+        String json=new String(buffer, "UTF-8");
         return json;
     }
 
     private ArrayList<String> readArray(String name, JSONObject jsonObject) throws JSONException{
-        JSONArray jsonArray = jsonObject.getJSONArray(name);
+        JSONArray jsonArray=jsonObject.getJSONArray(name);
         ArrayList<String> arrayList=new ArrayList<String>();
-        for(int i=0;i<jsonArray.length();i++){
+        for(int i=0;i<jsonArray.length();i++)
             arrayList.add(jsonArray.getString(i));
-        }
         return arrayList;
     }
 
@@ -91,7 +85,4 @@ public class FSM {
         return currentState;
     }
 
-    public static void showToast(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-    }
 }
