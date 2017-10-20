@@ -77,7 +77,7 @@ public class FSM {
         return transitionsList;
     }
 
-    public void changeState(String currentState, String action){
+    public void changeState(String action){
         String nextState=null;
         for(Transition transition : transitions){
             if(transition.getFromState().equals(currentState) && transition.getAction().equals(action))
