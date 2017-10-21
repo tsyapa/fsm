@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void changeIndicator(){
         String currentState=fsm.getCurrentState();
-        if(currentState.contains("Armed"))
+        if(currentState.toLowerCase().contains("alarmarmed"))
             tvState.setBackgroundColor(getResources().getColor(R.color.red));
         else
             tvState.setBackgroundColor(getResources().getColor(R.color.green));
