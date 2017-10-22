@@ -70,7 +70,7 @@ public class FSM {
         return actions;
     }
 
-    protected Transition[] readTransitions(JSONObject jsonObject) throws JSONException{
+    private Transition[] readTransitions(JSONObject jsonObject) throws JSONException{
         JSONArray jsonArray = jsonObject.getJSONArray("transitions");
         int length=jsonArray.length();
         Transition[] transitions=new Transition[length];

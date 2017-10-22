@@ -34,7 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setListeners();
         try{
             fsm=new FSM(this);
-            changeIndicator();
+            if (savedInstanceState!=null)
+                changeIndicator((State)savedInstanceState.getParcelable("lastState"));
+            else
+                changeIndicator(fsm.getCurrentState());
         }catch (IOException e){
             showDialog(this, "Error", "Cannot read configuration file");
             Log.e(TAG, Log.getStackTraceString(e));
@@ -67,30 +70,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.buttonLock:
                 fsm.changeState(LOCK_ID);
-                changeIndicator();
+                changeIndicator(fsm.getCurrentState());
                 break;
             case R.id.buttonLockX2:
                 fsm.changeState(LOCK_X2_ID);
-                changeIndicator();
+                changeIndicator(fsm.getCurrentState());
                 break;
             case R.id.buttonUnlock:
                 fsm.changeState(UNLOCK_ID);
-                changeIndicator();
+                changeIndicator(fsm.getCurrentState());
                 break;
             case R.id.buttonUnlockX2:
                 fsm.changeState(UNLOCK_X2_ID);
-                changeIndicator();
+                changeIndicator(fsm.getCurrentState());
                 break;
         }
     }
 
-    private void changeIndicator(){
-        State currentState=fsm.getCurrentState();
-        if(currentState.getIsAlarmArmed())
+    private void changeIndicator(State state){
+        if(state.getIsAlarmArmed())
             tvState.setBackgroundResource(R.color.red);
         else
             tvState.setBackgroundResource(R.color.green);
-        tvState.setText(currentState.getName());
+        tvState.setText(state.getName());
     }
 
     private void showDialog(final Activity activity, String title, String message){
@@ -108,4 +110,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alert.show();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("lastState", fsm.getCurrentState());
+    }
 }
