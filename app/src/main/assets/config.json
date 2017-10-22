@@ -1,101 +1,145 @@
 {
     "name": "FiniteStateMachine",
     "states":[
-        "AlarmDisarmed_AllUnlocked",
-        "AlarmDisarmed_AllLocked",
-        "AlarmArmed_AllLocked",
-        "AlarmDisarmed_DriverUnlocked"
+        {
+            "id":1,
+            "isArmAlarmed":false,
+            "name":"AlarmDisarmed_AllUnlocked"
+        },
+        {
+            "id":2,
+            "isArmAlarmed":false,
+            "name":"AlarmDisarmed_AllLocked"
+        },
+        {
+            "id":3,
+            "isArmAlarmed":true,
+            "name":"AlarmArmed_AllLocked"
+        },
+        {
+            "id":4,
+            "isArmAlarmed":false,
+            "name":"AlarmDisarmed_DriverUnlocked"
+        }
     ],
     "actions": [
-        "lock",
-        "lockX2",
-        "unlock",
-        "unlockX2"
+        {
+            "id":1,
+            "name":"lock"
+        },
+        {
+            "id":2,
+            "name":"lockX2"
+        },
+        {
+            "id":3,
+            "name":"unlock"
+        },
+        {
+            "id":4,
+            "name":"unlockX2"
+        }
     ],
-    "initialState":"AlarmDisarmed_AllUnlocked",
+    "initialStateId":1,
     "transitions":[
         {
-            "from":"AlarmDisarmed_AllUnlocked",
-            "to":"AlarmDisarmed_AllLocked",
-            "action":"lock"
+            "id":1,
+            "fromStateId":1,
+            "toStateId":3,
+            "actionId":1
         },
         {
-            "from":"AlarmDisarmed_AllUnlocked",
-            "to":"AlarmArmed_AllLocked",
-            "action":"lockX2"
+            "id":2,
+            "fromStateId":1,
+            "toStateId":3,
+            "actionId":2
         },
         {
-            "from":"AlarmDisarmed_AllUnlocked",
-            "to":"AlarmDisarmed_AllUnlocked",
-            "action":"unlock"
+            "id":3,
+            "fromStateId":1,
+            "toStateId":1,
+            "actionId":3
         },
         {
-            "from":"AlarmDisarmed_AllUnlocked",
-            "to":"AlarmDisarmed_AllUnlocked",
-            "action":"unlockX2"
-        },
-        
-        {
-            "from":"AlarmDisarmed_AllLocked",
-            "to":"AlarmArmed_AllLocked",
-            "action":"lock"
-        },
-        {
-            "from":"AlarmDisarmed_AllLocked",
-            "to":"AlarmArmed_AllLocked",
-            "action":"lockX2"
-        },
-        {
-            "from":"AlarmDisarmed_AllLocked",
-            "to":"AlarmDisarmed_DriverUnlocked",
-            "action":"unlock"
-        },
-        {
-            "from":"AlarmDisarmed_AllLocked",
-            "to":"AlarmDisarmed_AllUnlocked",
-            "action":"unlockX2"
+            "id":4,
+            "fromStateId":1,
+            "toStateId":1,
+            "actionId":4
         },
         
         {
-            "from":"AlarmArmed_AllLocked",
-            "to":"AlarmArmed_AllLocked",
-            "action":"lock"
+            "id":5,
+            "fromStateId":2,
+            "toStateId":3,
+            "actionId":1
         },
         {
-            "from":"AlarmArmed_AllLocked",
-            "to":"AlarmArmed_AllLocked",
-            "action":"lockX2"
+            "id":6,
+            "fromStateId":2,
+            "toStateId":3,
+            "actionId":2
         },
         {
-            "from":"AlarmArmed_AllLocked",
-            "to":"AlarmDisarmed_DriverUnlocked",
-            "action":"unlock"
+            "id":7,
+            "fromStateId":2,
+            "toStateId":4,
+            "actionId":3
         },
         {
-            "from":"AlarmArmed_AllLocked",
-            "to":"AlarmDisarmed_AllUnlocked",
-            "action":"unlockX2"
+            "id":8,
+            "fromStateId":2,
+            "toStateId":1,
+            "actionId":4
         },
         
         {
-            "from":"AlarmDisarmed_DriverUnlocked",
-            "to":"AlarmDisarmed_AllLocked",
-            "action":"lock"
+            "id":9,
+            "fromStateId":3,
+            "toStateId":3,
+            "actionId":1
         },
         {
-            "from":"AlarmDisarmed_DriverUnlocked",
-            "to":"AlarmArmed_AllLocked",
-            "action":"lockX2"
+            "id":10,
+            "fromStateId":3,
+            "toStateId":3,
+            "actionId":2
         },
         {
-            "from":"AlarmDisarmed_DriverUnlocked",
-            "to":"AlarmDisarmed_DriverUnlocked",
-            "action":"unlock"
+            "id":11,
+            "fromStateId":3,
+            "toStateId":4,
+            "actionId":4
         },
         {
-            "from":"AlarmDisarmed_DriverUnlocked",
-            "to":"AlarmDisarmed_DriverUnlocked",
-            "action":"unlockX2"
+            "id":12,
+            "fromStateId":3,
+            "toStateId":1,
+            "actionId":4
+        },
+        
+        {
+            "id":13,
+            "fromStateId":4,
+            "toStateId":2,
+            "actionId":1
+        },
+        {
+            "id":14,
+            "fromStateId":4,
+            "toStateId":3,
+            "actionId":2
+        },
+        {
+            "id":15,
+            "fromStateId":4,
+            "toStateId":4,
+            "actionId":3
+        },
+        {
+            "id":16,
+            "fromStateId":4,
+            "toStateId":4,
+            "actionId":4
         }
     ]
 }

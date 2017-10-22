@@ -1,6 +1,9 @@
 package com.example.vitaliytsyapa.fsm;
 
 import android.content.Context;
+
+import com.example.vitaliytsyapa.fsm.models.Transition;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
