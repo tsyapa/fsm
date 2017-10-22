@@ -11,7 +11,8 @@ public class Transition {
     private int toStateId;
     private int actionId;
 
-    public Transition(int fromStateId, int toStateId, int actionId){
+    public Transition(int id, int fromStateId, int toStateId, int actionId){
+        this.id=id;
         this.fromStateId=fromStateId;
         this.toStateId=toStateId;
         this.actionId=actionId;

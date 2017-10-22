@@ -1,4 +1,4 @@
-package com.example.vitaliytsyapa.fsm;
+package com.example.vitaliytsyapa.fsm.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,15 +9,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.example.vitaliytsyapa.fsm.FSM;
+import com.example.vitaliytsyapa.fsm.R;
+import com.example.vitaliytsyapa.fsm.models.State;
 import org.json.JSONException;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final String TAG=this.getClass().getSimpleName();
+    private final int LOCK_ID=1;
+    private final int LOCK_X2_ID=2;
+    private final int UNLOCK_ID=3;
+    private final int UNLOCK_X2_ID=4;
     private Button btnLock, btnLockX2, btnUnlock, btnUnlockX2;
     private TextView tvState;
-    private FSMInterface fsm;
+    private FSM fsm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,31 +66,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonLock:
-                fsm.changeState("lock");
+                fsm.changeState(LOCK_ID);
                 changeIndicator();
                 break;
             case R.id.buttonLockX2:
-                fsm.changeState("lockX2");
+                fsm.changeState(LOCK_X2_ID);
                 changeIndicator();
                 break;
             case R.id.buttonUnlock:
-                fsm.changeState("unlock");
+                fsm.changeState(UNLOCK_ID);
                 changeIndicator();
                 break;
             case R.id.buttonUnlockX2:
-                fsm.changeState("unlockX2");
+                fsm.changeState(UNLOCK_X2_ID);
                 changeIndicator();
                 break;
         }
     }
 
     private void changeIndicator(){
-        String currentState=fsm.getCurrentState();
-        if(currentState.toLowerCase().contains("alarmarmed"))
+        State currentState=fsm.getCurrentState();
+        if(currentState.getIsAlarmArmed())
             tvState.setBackgroundResource(R.color.red);
         else
             tvState.setBackgroundResource(R.color.green);
-        tvState.setText(fsm.getCurrentState());
+        tvState.setText(currentState.getName());
     }
 
     private void showDialog(final Activity activity, String title, String message){

@@ -3,22 +3,22 @@
     "states":[
         {
             "id":1,
-            "isArmAlarmed":false,
+            "isAlarmArmed":false,
             "name":"AlarmDisarmed_AllUnlocked"
         },
         {
             "id":2,
-            "isArmAlarmed":false,
+            "isAlarmArmed":false,
             "name":"AlarmDisarmed_AllLocked"
         },
         {
             "id":3,
-            "isArmAlarmed":true,
+            "isAlarmArmed":true,
             "name":"AlarmArmed_AllLocked"
         },
         {
             "id":4,
-            "isArmAlarmed":false,
+            "isAlarmArmed":false,
             "name":"AlarmDisarmed_DriverUnlocked"
         }
     ],
@@ -45,7 +45,7 @@
         {
             "id":1,
             "fromStateId":1,
-            "toStateId":3,
+            "toStateId":2,
             "actionId":1
         },
         {
@@ -70,7 +70,7 @@
         {
             "id":5,
             "fromStateId":2,
-            "toStateId":3,
+            "toStateId":2,
             "actionId":1
         },
         {
@@ -108,7 +108,7 @@
             "id":11,
             "fromStateId":3,
             "toStateId":4,
-            "actionId":4
+            "actionId":3
         },
         {
             "id":12,
