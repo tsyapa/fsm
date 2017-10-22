@@ -1,18 +1,10 @@
-package com.example.vitaliytsyapa.fsm;
+package com.example.vitaliytsyapa.fsm.logic;
 
 import android.content.Context;
 
 import com.example.vitaliytsyapa.fsm.models.*;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.IOException;
-import java.io.InputStream;
-
-/**
- * Created by Vitaliy Tsyapa on 10/17/2017.
- */
+import org.json.*;
+import java.io.*;
 
 public class FSM {
 
@@ -35,7 +27,7 @@ public class FSM {
         transitions=readTransitions(jsonObject);
         jsonObject=null;
     }
-
+    //reading json file config.json in assets and converting it into String
     protected String readJsonFile(Context context) throws IOException{
         InputStream is=context.getAssets().open("config.json");
         int size=is.available();
@@ -45,7 +37,7 @@ public class FSM {
         String json=new String(buffer, "UTF-8");
         return json;
     }
-
+    //reading states from jsonobject and putting them into array
     private State[] readStates(JSONObject jsonObject) throws JSONException{
         JSONArray jsonArray = jsonObject.getJSONArray("states");
         int length=jsonArray.length();
@@ -57,7 +49,7 @@ public class FSM {
         }
         return states;
     }
-
+    //reading actions from jsonobject and putting them into array
     private Action[] readActions(JSONObject jsonObject) throws JSONException{
         JSONArray jsonArray = jsonObject.getJSONArray("states");
         int length=jsonArray.length();
@@ -69,7 +61,7 @@ public class FSM {
         }
         return actions;
     }
-
+    //reading transitions from jsonobject and putting them into array
     private Transition[] readTransitions(JSONObject jsonObject) throws JSONException{
         JSONArray jsonArray = jsonObject.getJSONArray("transitions");
         int length=jsonArray.length();
@@ -82,7 +74,7 @@ public class FSM {
         return transitions;
     }
 
-
+    //reading initial state from jsonobject
     private State readInitialState(JSONObject jsonObject) throws JSONException{
         State state=null;
         int id=jsonObject.getInt("initialStateId");
@@ -94,7 +86,7 @@ public class FSM {
         }
         return state;
     }
-
+    //changing state based on current state and actionId if such transition exists
     public void changeState(int actionId){
         int nextStateId=-1;
         for(Transition transition : transitions){
@@ -114,8 +106,6 @@ public class FSM {
         return currentState;
     }
 
-    public void setCurrentState(State state){
-        currentState=state;
-    }
+    public void setCurrentState(State state){ currentState=state; }
 
 }

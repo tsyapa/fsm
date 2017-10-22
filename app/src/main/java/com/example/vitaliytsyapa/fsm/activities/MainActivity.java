@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.example.vitaliytsyapa.fsm.FSM;
+import com.example.vitaliytsyapa.fsm.logic.FSM;
 import com.example.vitaliytsyapa.fsm.R;
 import com.example.vitaliytsyapa.fsm.models.State;
 import org.json.JSONException;
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnUnlock.setOnClickListener(this);
         btnUnlockX2.setOnClickListener(this);
     }
-
+    //specifying buttons behaviour: changing state based on action id and changing indicator color if necessary
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
+    //changing indicator based on isAlarmArmed value of state
     private void changeIndicator(){
         State currentState=fsm.getCurrentState();
         if(currentState.getIsAlarmArmed())
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tvState.setBackgroundResource(R.color.green);
         tvState.setText(currentState.getName());
     }
-
+    //dialog to be shown in case of exception
     private void showDialog(final Activity activity, String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(title)

@@ -3,10 +3,6 @@ package com.example.vitaliytsyapa.fsm.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by Vitaliy Tsyapa on 10/22/2017.
- */
-
 public class State implements Parcelable{
 
     private int id;

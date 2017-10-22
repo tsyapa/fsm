@@ -1,9 +1,5 @@
 package com.example.vitaliytsyapa.fsm.models;
 
-/**
- * Created by Vitaliy Tsyapa on 10/19/2017.
- */
-
 public class Transition {
 
     private int id;

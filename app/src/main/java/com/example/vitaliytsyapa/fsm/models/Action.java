@@ -1,9 +1,5 @@
 package com.example.vitaliytsyapa.fsm.models;
 
-/**
- * Created by Vitaliy Tsyapa on 10/22/2017.
- */
-
 public class Action {
 
     private int id;
