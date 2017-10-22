@@ -114,4 +114,8 @@ public class FSM {
         return currentState;
     }
 
+    public void setCurrentState(State state){
+        currentState=state;
+    }
+
 }

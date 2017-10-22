@@ -34,10 +34,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setListeners();
         try{
             fsm=new FSM(this);
-            if (savedInstanceState!=null)
-                changeIndicator((State)savedInstanceState.getParcelable("lastState"));
+            if (savedInstanceState!=null) {   //restoring state if lost after activity restart
+                State lastState=(State) savedInstanceState.getParcelable("lastState");
+                fsm.setCurrentState(lastState);
+                changeIndicator();
+            }
             else
-                changeIndicator(fsm.getCurrentState());
+                changeIndicator();
         }catch (IOException e){
             showDialog(this, "Error", "Cannot read configuration file");
             Log.e(TAG, Log.getStackTraceString(e));
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.e(TAG,Log.getStackTraceString(e));
         }
     }
-
+    //initializing ui elements
     private void init(){
         tvState=(TextView) findViewById(R.id.textView);
         btnLock=(Button) findViewById(R.id.buttonLock);
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnUnlock=(Button) findViewById(R.id.buttonUnlock);
         btnUnlockX2=(Button) findViewById(R.id.buttonUnlockX2);
     }
-
+    //setting listeners
     private void setListeners() {
         btnLock.setOnClickListener(this);
         btnLockX2.setOnClickListener(this);
@@ -70,29 +73,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.buttonLock:
                 fsm.changeState(LOCK_ID);
-                changeIndicator(fsm.getCurrentState());
+                changeIndicator();
                 break;
             case R.id.buttonLockX2:
                 fsm.changeState(LOCK_X2_ID);
-                changeIndicator(fsm.getCurrentState());
+                changeIndicator();
                 break;
             case R.id.buttonUnlock:
                 fsm.changeState(UNLOCK_ID);
-                changeIndicator(fsm.getCurrentState());
+                changeIndicator();
                 break;
             case R.id.buttonUnlockX2:
                 fsm.changeState(UNLOCK_X2_ID);
-                changeIndicator(fsm.getCurrentState());
+                changeIndicator();
                 break;
         }
     }
 
-    private void changeIndicator(State state){
-        if(state.getIsAlarmArmed())
+    private void changeIndicator(){
+        State currentState=fsm.getCurrentState();
+        if(currentState.getIsAlarmArmed())
             tvState.setBackgroundResource(R.color.red);
         else
             tvState.setBackgroundResource(R.color.green);
-        tvState.setText(state.getName());
+        tvState.setText(currentState.getName());
     }
 
     private void showDialog(final Activity activity, String title, String message){
