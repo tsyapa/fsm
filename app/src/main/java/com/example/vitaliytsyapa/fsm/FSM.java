@@ -1,28 +1,22 @@
 package com.example.vitaliytsyapa.fsm;
 
-import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 /**
  * Created by Vitaliy Tsyapa on 10/17/2017.
  */
 
-public class FSM {
+public class FSM implements FSMInterface{
 
-    private ArrayList<String> states;
-    private ArrayList<String> actions;
+    private String[] states;
+    private String[] actions;
     private String currentState;
-    private ArrayList<Transition> transitions;
+    private Transition[] transitions;
     private Context context;
 
     public FSM(Context context) throws IOException,JSONException{
@@ -31,14 +25,15 @@ public class FSM {
     }
 
     private void init() throws IOException,JSONException{
-        JSONObject jsonObject=new JSONObject(readJson(context));
-        states=readArray("states", jsonObject);
-        actions=readArray("actions", jsonObject);
-        currentState=readField("initialState",jsonObject);
-        transitions=readTransitions(jsonObject);
+        JSONObject jsonObject=new JSONObject(readJsonFile(context));
+        states=readArrayFromJson("states", jsonObject);
+        actions=readArrayFromJson("actions", jsonObject);
+        currentState=readFieldFromJson("initialState",jsonObject);
+        transitions=readTransitionsFromJson(jsonObject);
+        jsonObject=null;
     }
 
-    private String readJson(Context context) throws IOException{
+    protected String readJsonFile(Context context) throws IOException{
         InputStream is=context.getAssets().open("config.json");
         int size=is.available();
         byte[] buffer=new byte[size];
@@ -48,27 +43,29 @@ public class FSM {
         return json;
     }
 
-    private ArrayList<String> readArray(String name, JSONObject jsonObject) throws JSONException{
+    protected String[] readArrayFromJson(String name, JSONObject jsonObject) throws JSONException{
         JSONArray jsonArray=jsonObject.getJSONArray(name);
-        ArrayList<String> arrayList=new ArrayList<String>();
-        for(int i=0;i<jsonArray.length();i++)
-            arrayList.add(jsonArray.getString(i));
-        return arrayList;
+        int length=jsonArray.length();
+        String[] array=new String[length];
+        for(int i=0;i<length;i++)
+            array[i]=jsonArray.getString(i);
+        return array;
     }
 
-    private String readField(String name, JSONObject jsonObject) throws JSONException{
+    protected String readFieldFromJson(String name, JSONObject jsonObject) throws JSONException{
         return jsonObject.getString(name);
     }
 
-    private ArrayList<Transition> readTransitions(JSONObject jsonObject) throws JSONException{
+    protected Transition[] readTransitionsFromJson(JSONObject jsonObject) throws JSONException{
         JSONArray jsonArray = jsonObject.getJSONArray("transitions");
-        ArrayList<Transition> transitionsList=new ArrayList<Transition>();
-        for(int i=0;i<jsonArray.length();i++){
+        int length=jsonArray.length();
+        Transition[] transitions=new Transition[length];
+        for(int i=0;i<length;i++){
             JSONObject inner=jsonArray.getJSONObject(i);
             Transition transition=new Transition(inner.getString("from"),inner.getString("to"),inner.getString("action"));
-            transitionsList.add(transition);
+            transitions[i]=transition;
         }
-        return transitionsList;
+        return transitions;
     }
 
     public void changeState(String action){

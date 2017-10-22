@@ -2,7 +2,6 @@ package com.example.vitaliytsyapa.fsm;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -21,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final String TAG=this.getClass().getSimpleName();
     private Button btnLock, btnLockX2, btnUnlock, btnUnlockX2;
     private TextView tvState;
-    private FSM fsm;
+    private FSMInterface fsm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }catch (JSONException e){
             showDialog(this, "Error", "Incorrect data in configuration file");
             Log.e(TAG,Log.getStackTraceString(e));
-        }
-        catch (Exception e){
+        }catch (Exception e){
             showDialog(this, "Error", "Something went wrong. Try again");
             Log.e(TAG,Log.getStackTraceString(e));
         }
@@ -85,9 +82,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void changeIndicator(){
         String currentState=fsm.getCurrentState();
         if(currentState.toLowerCase().contains("alarmarmed"))
-            tvState.setBackgroundColor(getResources().getColor(R.color.red));
+            tvState.setBackgroundResource(R.color.red);
         else
-            tvState.setBackgroundColor(getResources().getColor(R.color.green));
+            tvState.setBackgroundResource(R.color.green);
         tvState.setText(fsm.getCurrentState());
     }
 
